@@ -13,7 +13,7 @@ This project demonstrates how to deploy a secure and private Azure Kubernetes Cl
 ### 1. Clone the repository:
 
 ```bash
-git clone [https://github.com/MShanavas/PrivateAzure-K8s-ACR-Bastion.git](https://github.com/MShanavas/PrivateAzure-K8s-ACR-Bastion.git)
+git clone [https://github.com/MShanavas/PrivateAzure-K8s-ACR-Bastion.git]
 ```
 
 ### 2. Navigate to the project directory:
