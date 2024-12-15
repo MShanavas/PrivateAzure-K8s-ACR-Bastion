@@ -1,0 +1,27 @@
+# Define variables (as before)
+variable "resource_group_name" { default = "rg-private-aks" }
+variable "location" { default = "West US 2" }
+variable "vnet_name" { default = "vnet-aks" }
+variable "subnet_aks_name" { default = "snet-aks" }
+variable "subnet_vm_name" { default = "snet-vm" }
+variable "private_dns_zone_name" { default = "azurecr.io" }
+variable "aks_cluster_name" { default = "aks-private" }
+variable "acr_name" { default = "smprivateacr" }
+variable "vm_name" { default = "sm-server" }
+variable "app_gateway_name" { default = "app-publish" }
+variable "vmsku" { default = "22_04-lts" }
+variable "vmsize" { default = "Standard_B2s_v2" }
+variable "vmoffer" { default = "0001-com-ubuntu-server-jammy" }
+variable "vmpublisher" { default = "canonical" }
+variable "vmadmin_username" { default = "devops" }
+variable "subnet_bastion_name" { default = "AzureBastionSubnet" }
+variable "managed_identity" { default = "pvt-aks-identity" }
+variable "bastion_pip_name" { default = "pip-bastion" }
+variable "bastion_name" { default = "jump-server" }
+variable "k8s_dns_prefix" { default = "ak-pvt" }
+variable "node_vmsize" { default = "Standard_D2s_v3" }
+variable "aks_endpoint_name" { default = "aks-endpoint" }
+variable "acr_endpoint_name" { default = "acr-endpoint" }
+variable "aks_private_service_connection" { default = "aks-pvt" }
+variable "acr_private_service_connection" { default = "acr-pvt" }
+variable "vm_nicname" { default = "nic-pvt-vm" }
