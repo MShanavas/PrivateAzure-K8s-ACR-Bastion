@@ -1,19 +1,61 @@
 # Private Azure Kubernetes Cluster (AKS) with Private Azure Container Registry (ACR) and Bastion Host
 
-This project demonstrates how to deploy a secure and private Azure Kubernetes Cluster (AKS) with a private Azure Container Registry (ACR) and a Bastion Host for secure access.
+This project demonstrates how to deploy a secure, private Azure Kubernetes Service (AKS) cluster with a private Azure Container Registry (ACR) and a Bastion Host for secure, auditable access. This setup is ideal for organizations looking to restrict public access to their workloads and container images while maintaining operational flexibility.
+
+---
+
+## Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Architecture Overview](#architecture-overview)
+- [Deployment Steps](#deployment-steps)
+  - [1. Clone the Repository](#1-clone-the-repository)
+  - [2. Navigate to the Project Directory](#2-navigate-to-the-project-directory)
+  - [3. Provision the Infrastructure Using Terraform](#3-provision-the-infrastructure-using-terraform)
+  - [4. Access the VM Through the Bastion Host](#4-access-the-vm-through-the-bastion-host)
+  - [5. Run the Installation Script](#5-run-the-installation-script)
+  - [6. Configure kubectl](#6-configure-kubectl)
+  - [7. Login to Your Private ACR](#7-login-to-your-private-acr)
+  - [8. Build and Push Your Docker Image](#8-build-and-push-your-docker-image)
+  - [9. Create a Kubernetes Secret for Your Private ACR](#9-create-a-kubernetes-secret-for-your-private-acr)
+  - [10. Deploy Your Application to AKS](#10-deploy-your-application-to-aks)
+- [Troubleshooting & Tips](#troubleshooting--tips)
+- [Cleanup](#cleanup)
+- [References](#references)
+
+---
 
 ## Prerequisites
 
-* **Azure Account:** An active Azure subscription.
-* **Azure CLI:** Installed and configured with your Azure credentials.
-* **Terraform:** Installed and configured on your local machine.
+- **Azure Subscription:** An active Azure subscription with sufficient permissions.
+- **Azure CLI:** [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) and login using `az login`.
+- **Terraform:** [Install Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) (latest version recommended).
+- **Git:** Ensure git is installed on your machine.
+- **Basic Knowledge:** Familiarity with the basics of Azure, networking, containers, and Kubernetes is helpful.
+
+---
+
+## Architecture Overview
+
+This project provisions and configures the following Azure resources:
+
+- **Resource Group:** Logical container for all resources.
+- **Virtual Network (VNet):** Isolated network with subnets for AKS, ACR, Bastion, and VM.
+- **Azure Container Registry (ACR):** Private registry for storing and managing container images.
+- **Azure Kubernetes Service (AKS):** Private Kubernetes cluster, integrated with ACR.
+- **Bastion Host:** Secure, browser-based RDP/SSH access to VMs without exposing them to the public internet.
+- **Virtual Machine (VM):** Jumpbox with installation tools for administration and deployment.
+
+All components are isolated from the public internet except for controlled Bastion host ingress.
+
+---
 
 ## Deployment Steps
 
-### 1. Clone the repository:
+### 1. Clone the Repository
 
 ```bash
-git clone [https://github.com/MShanavas/PrivateAzure-K8s-ACR-Bastion.git]
+git clone https://github.com/MShanavas/PrivateAzure-K8s-ACR-Bastion.git
 ```
 
 ### 2. Navigate to the project directory:
